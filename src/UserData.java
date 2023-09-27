@@ -2,22 +2,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class UsedData{
+public class UserData {
     private String userString;
+
+    public String getFullName() {
+        return fullName;
+    }
+
     private String fullName;
     private String dateOfBirth;
     private long phoneNumber;
     private String gender;
 
-    public UsedData(String userString) {
+    public UserData(String userString) {
         this.userString = userString;
     }
-
-    public String getName() {
-        return fullName;
-    }
-
-
 
     public String getDateOfBirth() {
         return dateOfBirth;
@@ -33,8 +32,10 @@ public class UsedData{
 
     public void checkUserData() throws UserDataException, DateTimeParseException, NumberFormatException{
         String[] userData = userString.split(" ");
-        if (userData.length != 6){
+        if (userData.length < 6){
             throw new UserDataException("Введена не вся информация. Мне жаль ;(");
+        }else if(userData.length > 6){
+            throw new UserDataException("Введена избыточная информация. Мне жаль ;(");
         }
 
         fullName =  userData[0] + " " + userData[1] + " " + userData[2];
